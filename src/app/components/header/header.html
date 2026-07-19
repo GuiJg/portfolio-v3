@@ -1,0 +1,56 @@
+<header class="site-header">
+  <div class="header-shell">
+    <a class="brand" href="#home" aria-label="Voltar para o início">
+      <span class="brand-mark">JP</span>
+      <span class="brand-name">José Pessoa</span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <a href="#home" class="active">Home</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#skills">Skills</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#contato">Contato</a>
+    </nav>
+
+    <div class="header-actions">
+      <button
+        type="button"
+        class="theme-toggle"
+        (click)="toggleTheme()"
+        [attr.aria-label]="
+          isLightTheme ? 'Ativar tema escuro' : 'Ativar tema claro'
+        "
+      >
+        <i
+          class="pi"
+          [class.pi-moon]="!isLightTheme"
+          [class.pi-sun]="isLightTheme"
+          aria-hidden="true"
+        ></i>
+      </button>
+
+      <button
+        type="button"
+        class="menu-button"
+        (click)="toggleMenu()"
+        aria-label="Abrir menu"
+        [attr.aria-expanded]="isMenuOpen"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  @if (isMenuOpen) {
+    <nav class="mobile-nav" aria-label="Navegação mobile">
+      <a href="#home" (click)="closeMenu()">Home</a>
+      <a href="#sobre" (click)="closeMenu()">Sobre</a>
+      <a href="#skills" (click)="closeMenu()">Skills</a>
+      <a href="#projetos" (click)="closeMenu()">Projetos</a>
+      <a href="#contato" (click)="closeMenu()">Contato</a>
+    </nav>
+  }
+</header>

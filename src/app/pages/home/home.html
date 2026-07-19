@@ -1,0 +1,256 @@
+<main>
+  <section id="home" class="hero-section">
+    <div class="section-container hero-grid">
+      <div class="hero-copy">
+        <span class="section-kicker">Olá, eu sou</span>
+        <h1>José <span>Pessoa</span></h1>
+        <p class="hero-role">Desenvolvedor Full-Stack <span></span></p>
+        <p class="hero-description">
+          Transformo ideias em aplicações web modernas, escaláveis e
+          performáticas.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projetos">
+            Ver meus projetos
+            <i class="pi pi-arrow-right" aria-hidden="true"></i>
+          </a>
+          <a class="btn btn-outline" href="#contato">
+            Entre em contato
+            <i class="pi pi-send" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <div class="social-links" aria-label="Redes sociais">
+          <a
+            href="https://github.com/josepessoa"
+            target="_blank"
+            aria-label="GitHub"
+          >
+            <i class="pi pi-github" aria-hidden="true"></i>
+          </a>
+          <a
+            href="https://linkedin.com/in/josepessoa"
+            target="_blank"
+            aria-label="LinkedIn"
+          >
+            <i class="pi pi-linkedin" aria-hidden="true"></i>
+          </a>
+          <a href="mailto:josepessoa.dev@gmail.com" aria-label="Email">
+            <i class="pi pi-envelope" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="code-orbit">
+          <span class="orbit orbit-one"></span>
+          <span class="orbit orbit-two"></span>
+          <span class="code-bracket left">&lt;</span>
+          <span class="code-slash">/</span>
+          <span class="code-bracket right">&gt;</span>
+          <span class="code-floor"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre" class="about-section">
+    <div class="section-container about-grid">
+      <div>
+        <span class="section-kicker">Sobre mim</span>
+        <h2>
+          Desenvolvedor por <span class="accent">paixão</span>,<br />
+          criador por <span class="accent">natureza</span>.
+        </h2>
+        <p>
+          Sou desenvolvedor full-stack com foco em criar soluções digitais
+          completas e eficientes. Gosto de trabalhar com tecnologias modernas e
+          boas práticas de desenvolvimento para entregar experiências incríveis.
+        </p>
+        <a class="btn btn-outline about-download" href="#" download>
+          Baixar meu CV
+          <i class="pi pi-download" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <article class="profile-card">
+        <div class="profile-item">
+          <span class="profile-icon">
+            <i class="pi pi-user" aria-hidden="true"></i>
+          </span>
+          <div>
+            <strong>Nome</strong>
+            <p>José Pessoa</p>
+          </div>
+        </div>
+        <div class="profile-item">
+          <span class="profile-icon">
+            <i class="pi pi-map-marker" aria-hidden="true"></i>
+          </span>
+          <div>
+            <strong>Localização</strong>
+            <p>Brasil</p>
+          </div>
+        </div>
+        <div class="profile-item">
+          <span class="profile-icon">
+            <i class="pi pi-briefcase" aria-hidden="true"></i>
+          </span>
+          <div>
+            <strong>Experiência</strong>
+            <p>+2 anos</p>
+          </div>
+        </div>
+        <div class="profile-item">
+          <span class="profile-icon">
+            <i class="pi pi-clock" aria-hidden="true"></i>
+          </span>
+          <div>
+            <strong>Disponibilidade</strong>
+            <p>Disponível para projetos</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills" class="skills-section">
+    <div class="section-container">
+      <div class="section-heading">
+        <span class="section-kicker">Minhas skills</span>
+        <h2>Tecnologias que <span class="accent">utilizo</span></h2>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Frontend</h3>
+          <div class="skill-list">
+            @for (skill of frontendSkills; track skill.name) {
+              <article class="skill-card" [style.--tech-color]="skill.color">
+                <i [class]="skill.icon" aria-hidden="true"></i>
+                <span>{{ skill.name }}</span>
+              </article>
+            }
+          </div>
+        </div>
+
+        <div class="skills-divider" aria-hidden="true"></div>
+
+        <div class="skill-group">
+          <h3>Backend</h3>
+          <div class="skill-list">
+            @for (skill of backendSkills; track skill.name) {
+              <article class="skill-card" [style.--tech-color]="skill.color">
+                <i [class]="skill.icon" aria-hidden="true"></i>
+                <span>{{ skill.name }}</span>
+              </article>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projetos" class="projects-section">
+    <div class="section-container">
+      <div class="section-heading">
+        <span class="section-kicker">Projetos em destaque</span>
+        <h2>Alguns <span class="accent">projetos</span> que desenvolvi</h2>
+      </div>
+
+      <div class="projects-grid">
+        @for (project of projects; track project.title) {
+          <article class="project-card">
+            <div class="project-image" aria-label="Imagem do projeto em branco">
+              <img
+                src="{{ project.image }}"
+                alt="Imagem do projeto em branco"
+              />
+            </div>
+            <div class="project-content">
+              <h3>{{ project.title }}</h3>
+              <p>{{ project.description }}</p>
+
+              <div class="project-tags">
+                @for (tag of project.tags; track tag.label) {
+                  <span
+                    [style.--tech-color]="tag.color"
+                    [attr.title]="tag.label"
+                  >
+                    <i [class]="tag.icon" aria-hidden="true"></i>
+                  </span>
+                }
+              </div>
+
+              <a class="project-link" href="#">
+                Ver projeto
+                <i class="pi pi-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+        }
+      </div>
+
+      <div class="projects-cta">
+        <a class="btn btn-outline" href="#">
+          Ver todos os projetos
+          <i class="pi pi-th-large" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="contact-section">
+    <div class="section-container contact-grid">
+      <div class="contact-copy">
+        <span class="section-kicker">Entre em contato</span>
+        <h2>Vamos construir algo <span class="accent">incrível</span> juntos!</h2>
+        <p>
+          Estou disponível para novos projetos e oportunidades. Vamos conversar!
+        </p>
+
+        <div class="contact-list">
+          <a href="mailto:josepessoa.dev@gmail.com">
+            <i class="pi pi-envelope" aria-hidden="true"></i>
+            josepessoa.dev@gmail.com
+          </a>
+          <a href="https://linkedin.com/in/josepessoa" target="_blank">
+            <i class="pi pi-linkedin" aria-hidden="true"></i>
+            linkedin.com/in/josepessoa
+          </a>
+          <a href="https://github.com/josepessoa" target="_blank">
+            <i class="pi pi-github" aria-hidden="true"></i>
+            github.com/josepessoa
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form" (submit)="onSubmit($event)">
+        <div class="form-row">
+          <label>
+            <span>Nome</span>
+            <input type="text" name="name" placeholder="Nome" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" name="email" placeholder="Email" />
+          </label>
+        </div>
+        <label>
+          <span>Assunto</span>
+          <input type="text" name="subject" placeholder="Assunto" />
+        </label>
+        <label>
+          <span>Mensagem</span>
+          <textarea name="message" rows="5" placeholder="Mensagem"></textarea>
+        </label>
+        <button class="btn btn-primary" type="submit">
+          <i class="pi pi-th-large" aria-hidden="true"></i>
+          Enviar mensagem
+          <i class="pi pi-arrow-right" aria-hidden="true"></i>
+        </button>
+      </form>
+    </div>
+  </section>
+</main>

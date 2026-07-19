@@ -1,3 +1,179 @@
-/* You can add global styles to this file, and also import other style files */
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import 'tailwindcss';
+@import 'primeicons/primeicons.css';
+@import 'boxicons/css/boxicons.min.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  color-scheme: dark;
+  --bg-main: #02040a;
+  --bg-deep: #010104;
+  --bg-section: #05080e;
+  --bg-card: #080b13;
+  --bg-card-light: #11141b;
+
+  --border-dark: #172033;
+  --border-blue: #22344f;
+
+  --blue-primary: #0673f9;
+  --blue-button: #0a84ff;
+  --blue-secondary: #1a96ec;
+  --blue-dark: #0544ac;
+  --blue-glow-dark: #011850;
+  --cyan-neon: #11d9fc;
+
+  --text-primary: #f6f8fa;
+  --text-soft: #dde2e8;
+  --text-secondary: #a6aab1;
+  --text-muted: #747881;
+  --text-disabled: #43454d;
+  --container: 1180px;
+  --header-height: 76px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.light-theme {
+  color-scheme: light;
+  --bg-main: #f4f8ff;
+  --bg-deep: #ecf4ff;
+  --bg-section: #f8fbff;
+  --bg-card: #ffffff;
+  --bg-card-light: #eef5ff;
+  --border-dark: #d8e3f4;
+  --border-blue: #bdd8ff;
+  --text-primary: #061223;
+  --text-soft: #12223a;
+  --text-secondary: #4d5c70;
+  --text-muted: #6f7d91;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(6, 115, 249, 0.14), transparent 32rem),
+    radial-gradient(circle at 85% 28%, rgba(17, 217, 252, 0.08), transparent 34rem),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-main) 48%, #010206 100%);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(10, 132, 255, 0.36);
+  color: #fff;
+}
+
+.section-container {
+  width: min(100% - 48px, var(--container));
+  margin: 0 auto;
+}
+
+.section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--blue-button);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.section-kicker::before {
+  width: 28px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--blue-button));
+  content: '';
+}
+
+.accent {
+  color: var(--blue-button);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 52px;
+  border: 1px solid transparent;
+  border-radius: 0.45rem;
+  padding: 0 1.55rem;
+  font-size: 0.94rem;
+  font-weight: 800;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease,
+    color 180ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0878ff 0%, #0a6dff 45%, #0062f5 100%);
+  box-shadow:
+    0 0 22px rgba(10, 132, 255, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  box-shadow:
+    0 0 34px rgba(10, 132, 255, 0.58),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.btn-outline {
+  border-color: rgba(10, 132, 255, 0.72);
+  background: rgba(2, 9, 22, 0.45);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  border-color: var(--cyan-neon);
+  background: rgba(10, 132, 255, 0.1);
+  color: #fff;
+}
+
+@media (max-width: 720px) {
+  .section-container {
+    width: min(100% - 32px, var(--container));
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
