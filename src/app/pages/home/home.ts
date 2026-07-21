@@ -80,6 +80,7 @@ export class Home {
         { label: 'MongoDB', icon: 'bx bxl-mongodb', color: '#4ade80' },
         { label: 'Tailwind', icon: 'bx bxl-tailwind-css', color: '#38bdf8' },
       ],
+      link: ['https://naojoguelixo.com.br/']
     },
     {
       image: 'projetos/oxente-cafe.png',
@@ -91,6 +92,7 @@ export class Home {
         { label: 'MongoDB', icon: 'bx bxl-mongodb', color: '#4ade80' },
         { label: 'Tailwind', icon: 'bx bxl-tailwind-css', color: '#38bdf8' },
       ],
+      link: ['https://e-commerce-test-react-vite.vercel.app/']
     },
     {
       image: 'projetos/santosmonteiro.png',
@@ -102,6 +104,7 @@ export class Home {
         { label: 'MongoDB', icon: 'bx bxl-mongodb', color: '#4ade80' },
         { label: 'Tailwind', icon: 'bx bxl-tailwind-css', color: '#38bdf8' },
       ],
+      link: ['https://santosmonteiro-adv.vercel.app/']
     },
   ];
 
