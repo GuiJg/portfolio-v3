@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="JP">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#062f6f" />
+      <stop offset="58%" stop-color="#020816" />
+      <stop offset="100%" stop-color="#010104" />
+    </radialGradient>
+
+    <filter id="blue-glow" x="-45%" y="-45%" width="190%" height="190%">
+      <feGaussianBlur stdDeviation="2.8" result="blur" />
+      <feColorMatrix
+        in="blur"
+        type="matrix"
+        values="0 0 0 0 0.04 0 0 0 0 0.52 0 0 0 0 1 0 0 0 0.82 0"
+        result="glow"
+      />
+      <feMerge>
+        <feMergeNode in="glow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="64" height="64" rx="14" fill="url(#bg)" />
+  <text
+    x="31.5"
+    y="41"
+    text-anchor="middle"
+    font-family="Inter, Arial, sans-serif"
+    font-size="32"
+    font-weight="900"
+    letter-spacing="-5"
+    fill="#0a84ff"
+    filter="url(#blue-glow)"
+  >
+    JP
+  </text>
+</svg>
