@@ -154,13 +154,29 @@
         <h2>Alguns <span class="accent">projetos</span> que desenvolvi</h2>
       </div>
 
-      <div class="projects-grid">
-        @for (project of projects; track project.title) {
+      <div class="project-filters" aria-label="Filtrar projetos por categoria">
+        @for (category of projectCategories; track category.id) {
+          <button
+            type="button"
+            class="project-filter"
+            [class.active]="selectedProjectCategory === category.id"
+            [attr.aria-pressed]="selectedProjectCategory === category.id"
+            (click)="selectProjectCategory(category.id)"
+          >
+            {{ category.label }}
+          </button>
+        }
+      </div>
+
+      @if (filteredProjects.length > 0) {
+        <div class="projects-grid">
+        @for (project of filteredProjects; track project.title) {
           <article class="project-card">
-            <div class="project-image" aria-label="Imagem do projeto em branco">
-              <img src="{{ project.image }}" alt="Imagem do projeto em branco" />
+            <div class="project-image">
+              <img [src]="project.image" [alt]="'Banner do projeto ' + project.title" />
             </div>
             <div class="project-content">
+              <span class="project-category">{{ project.categoryLabel }}</span>
               <h3>{{ project.title }}</h3>
               <p>{{ project.description }}</p>
 
@@ -172,14 +188,32 @@
                 }
               </div>
 
-              <a class="project-link" href="{{ project.link }}" target="_blank">
-                Ver projeto
-                <i class="pi pi-arrow-right" aria-hidden="true"></i>
-              </a>
+              @if (project.link) {
+                <a
+                  class="project-link"
+                  [href]="project.link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ver projeto
+                  <i class="pi pi-arrow-right" aria-hidden="true"></i>
+                </a>
+              } @else {
+                <span class="project-link project-link-disabled">
+                  Em breve
+                  <i class="pi pi-clock" aria-hidden="true"></i>
+                </span>
+              }
             </div>
           </article>
         }
-      </div>
+        </div>
+      } @else {
+        <div class="projects-empty" role="status">
+          <i class="pi pi-folder-open" aria-hidden="true"></i>
+          <p>Projetos desta categoria serão adicionados em breve.</p>
+        </div>
+      }
 
       <div class="projects-cta">
         <a class="btn btn-outline">

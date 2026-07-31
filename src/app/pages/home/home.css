@@ -385,6 +385,50 @@
   content: '';
 }
 
+.project-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-bottom: 2rem;
+}
+
+.project-filter {
+  border: 1px solid rgba(71, 95, 132, 0.48);
+  border-radius: 999px;
+  padding: 0.62rem 1.1rem;
+  background: rgba(8, 12, 22, 0.72);
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 750;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.project-filter:hover {
+  border-color: rgba(10, 132, 255, 0.72);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.project-filter.active {
+  border-color: var(--blue-button);
+  background: rgba(10, 132, 255, 0.16);
+  color: var(--blue-button);
+  box-shadow: 0 0 20px rgba(10, 132, 255, 0.18);
+}
+
+.project-filter:focus-visible {
+  outline: 2px solid var(--cyan-neon);
+  outline-offset: 3px;
+}
+
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -431,6 +475,20 @@
 
 .project-content {
   padding: 1.25rem 1rem 1.35rem;
+}
+
+.project-category {
+  display: inline-flex;
+  margin-bottom: 0.55rem;
+  border: 1px solid rgba(10, 132, 255, 0.34);
+  border-radius: 999px;
+  padding: 0.28rem 0.65rem;
+  background: rgba(10, 132, 255, 0.09);
+  color: var(--cyan-neon);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 .project-content h3 {
@@ -483,10 +541,41 @@
   color: var(--cyan-neon);
 }
 
+.project-link-disabled {
+  color: var(--text-muted);
+  cursor: default;
+}
+
+.project-link-disabled:hover {
+  color: var(--text-muted);
+}
+
 .projects-cta {
   display: flex;
   justify-content: center;
   margin-top: 2.2rem;
+}
+
+.projects-empty {
+  display: grid;
+  min-height: 230px;
+  place-items: center;
+  align-content: center;
+  gap: 0.9rem;
+  border: 1px dashed rgba(71, 95, 132, 0.48);
+  border-radius: 0.85rem;
+  background: rgba(8, 12, 22, 0.48);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.projects-empty i {
+  color: var(--blue-button);
+  font-size: 2rem;
+}
+
+.projects-empty p {
+  margin: 0;
 }
 
 .contact-grid {
@@ -627,6 +716,19 @@
   .projects-cta {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .project-filters {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    margin-inline: -16px;
+    padding: 0 16px 0.5rem;
+    scrollbar-width: thin;
+  }
+
+  .project-filter {
+    flex: 0 0 auto;
   }
 
   .projects-grid,
