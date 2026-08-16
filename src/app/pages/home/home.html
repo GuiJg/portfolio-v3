@@ -59,14 +59,6 @@
           Gosto de trabalhar com tecnologias modernas e boas práticas de desenvolvimento para
           entregar experiências incríveis.
         </p>
-        <a
-          class="btn btn-outline about-download"
-          href="/Curr%C3%ADculo%20-%20Jos%C3%A9%20Guilherme%20-%20Full-stack.pdf"
-          download="Currículo - José Guilherme - Full-stack.pdf"
-        >
-          Baixar meu CV
-          <i class="pi pi-download" aria-hidden="true"></i>
-        </a>
       </div>
 
       <article class="profile-card">
@@ -152,20 +144,63 @@
       <div class="section-heading">
         <span class="section-kicker">Projetos em destaque</span>
         <h2>Alguns <span class="accent">projetos</span> que desenvolvi</h2>
+        <p class="projects-note">
+          Alguns projetos reais podem ser apresentados em versões de demonstração, pois os
+          domínios originais foram alterados, substituídos ou descontinuados pelos próprios
+          clientes.
+        </p>
       </div>
 
       <div class="project-filters" aria-label="Filtrar projetos por categoria">
-        @for (category of projectCategories; track category.id) {
-          <button
-            type="button"
-            class="project-filter"
-            [class.active]="selectedProjectCategory === category.id"
-            [attr.aria-pressed]="selectedProjectCategory === category.id"
-            (click)="selectProjectCategory(category.id)"
-          >
-            {{ category.label }}
-          </button>
-        }
+        <button
+          type="button"
+          class="project-filter project-filter-all"
+          [class.active]="!hasActiveProjectFilters"
+          [attr.aria-pressed]="!hasActiveProjectFilters"
+          [style.--category-color]="allProjectsCategory.color"
+          (click)="clearProjectFilters()"
+        >
+          <i class="pi pi-th-large" aria-hidden="true"></i>
+          {{ allProjectsCategory.label }}
+        </button>
+
+        <div class="project-filter-groups">
+          @for (group of projectCategoryGroups; track group.label) {
+            <fieldset class="project-filter-group">
+              <legend>{{ group.label }}</legend>
+              <p>{{ group.description }}</p>
+
+              <div class="project-filter-options">
+                @for (categoryId of group.categoryIds; track categoryId) {
+                  <button
+                    type="button"
+                    class="project-filter"
+                    [class.active]="isProjectCategorySelected(categoryId)"
+                    [attr.aria-pressed]="isProjectCategorySelected(categoryId)"
+                    [style.--category-color]="getProjectCategory(categoryId).color"
+                    (click)="selectProjectCategory(group.id, categoryId)"
+                  >
+                    {{ getProjectCategory(categoryId).label }}
+                  </button>
+                }
+              </div>
+            </fieldset>
+          }
+        </div>
+
+        <div class="project-filter-summary" aria-live="polite">
+          @if (hasActiveProjectFilters) {
+            <i class="pi pi-filter" aria-hidden="true"></i>
+            <span>
+              Combinação selecionada:
+              <strong>{{ selectedProjectFilterLabels.join(' + ') }}</strong>
+            </span>
+            <button type="button" (click)="clearProjectFilters()">Limpar filtros</button>
+          } @else {
+            <i class="pi pi-info-circle" aria-hidden="true"></i>
+            <span>Escolha até uma opção de cada grupo para combinar os filtros.</span>
+          }
+        </div>
       </div>
 
       @if (filteredProjects.length > 0) {
@@ -176,14 +211,34 @@
               <img [src]="project.image" [alt]="'Banner do projeto ' + project.title" />
             </div>
             <div class="project-content">
-              <span class="project-category">{{ project.categoryLabel }}</span>
+              <div class="project-categories" aria-label="Categorias do projeto">
+                @for (categoryId of project.categories; track categoryId) {
+                  <span
+                    class="project-category"
+                    [style.--category-color]="getProjectCategory(categoryId).color"
+                  >
+                    {{ getProjectCategory(categoryId).label }}
+                  </span>
+                }
+              </div>
               <h3>{{ project.title }}</h3>
               <p>{{ project.description }}</p>
 
               <div class="project-tags">
                 @for (tag of project.tags; track tag.label) {
-                  <span [style.--tech-color]="tag.color" [attr.title]="tag.label">
-                    <i [class]="tag.icon" aria-hidden="true"></i>
+                  <span
+                    [style.--tech-color]="tag.color"
+                    [attr.title]="tag.label"
+                    [attr.aria-label]="tag.label"
+                    role="img"
+                  >
+                    @if (tag.icon) {
+                      <i [class]="tag.icon" aria-hidden="true"></i>
+                    } @else {
+                      <strong class="project-tech-text" aria-hidden="true">
+                        {{ tag.textIcon }}
+                      </strong>
+                    }
                   </span>
                 }
               </div>
@@ -211,16 +266,99 @@
       } @else {
         <div class="projects-empty" role="status">
           <i class="pi pi-folder-open" aria-hidden="true"></i>
-          <p>Projetos desta categoria serão adicionados em breve.</p>
+          <h3>Ainda não existe um projeto com essa combinação</h3>
+          <p>
+            Nenhum projeto reúne atualmente
+            <strong>{{ selectedProjectFilterLabels.join(' + ') }}</strong>.
+            Que tal criar o primeiro?
+          </p>
+          <a
+            class="btn btn-primary"
+            href="#contato"
+            (click)="prepareQuoteFromFilters()"
+          >
+            <i class="pi pi-whatsapp" aria-hidden="true"></i>
+            Solicitar um projeto assim
+          </a>
         </div>
       }
+    </div>
+  </section>
 
-      <div class="projects-cta">
-        <a class="btn btn-outline">
-          Em breve
-          <i class="pi pi-th-large" aria-hidden="true"></i>
-        </a>
+  <section id="servicos" class="services-section">
+    <div class="section-container">
+      <div class="section-heading">
+        <span class="section-kicker">Encontre a solução ideal</span>
+        <h2>Qual tipo de <span class="accent">projeto</span> você precisa?</h2>
+        <p class="services-intro">
+          Cada solução atende a um momento diferente do negócio. Compare objetivos, recursos e
+          aplicações para solicitar exatamente o que sua empresa precisa.
+        </p>
       </div>
+
+      <div class="services-grid">
+        @for (service of services; track service.title) {
+          <article class="service-card" [style.--service-color]="service.color">
+            <div class="service-card-heading">
+              <span class="service-icon">
+                <i [class]="service.icon" aria-hidden="true"></i>
+              </span>
+              <div>
+                <span class="service-eyebrow">{{ service.eyebrow }}</span>
+                <h3>{{ service.title }}</h3>
+              </div>
+            </div>
+
+            <p class="service-summary">{{ service.summary }}</p>
+            <p class="service-description">{{ service.description }}</p>
+
+            <div class="service-ideal">
+              <strong>Ideal para</strong>
+              <p>{{ service.idealFor }}</p>
+            </div>
+
+            <div class="service-features">
+              <strong>O projeto pode incluir</strong>
+              <ul>
+                @for (feature of service.features; track feature) {
+                  <li>
+                    <i class="pi pi-check-circle" aria-hidden="true"></i>
+                    {{ feature }}
+                  </li>
+                }
+              </ul>
+            </div>
+
+            <a
+              class="service-cta"
+              href="#contato"
+              (click)="selectServiceForQuote(service.quoteOption)"
+            >
+              <i class="pi pi-whatsapp" aria-hidden="true"></i>
+              Solicitar orçamento de {{ service.title }}
+            </a>
+          </article>
+        }
+      </div>
+
+      <aside class="services-final-cta">
+        <div>
+          <span>Precisa de orientação?</span>
+          <h3>Não sabe qual solução combina com sua ideia?</h3>
+          <p>
+            Conte seu objetivo e eu ajudo a definir o formato, os recursos e o melhor caminho para
+            transformar sua necessidade em um projeto digital.
+          </p>
+        </div>
+        <a
+          class="btn whatsapp-submit"
+          href="#contato"
+          (click)="selectServiceForQuote('Personalizado')"
+        >
+          <i class="pi pi-whatsapp" aria-hidden="true"></i>
+          Conversar sobre meu projeto
+        </a>
+      </aside>
     </div>
   </section>
 
@@ -247,29 +385,103 @@
         </div>
       </div>
 
-      <form class="contact-form" (submit)="onSubmit($event)">
+      <form
+        class="contact-form"
+        #quoteForm="ngForm"
+        (ngSubmit)="sendWhatsApp(quoteForm)"
+        novalidate
+      >
         <div class="form-row">
-          <label>
-            <span>Nome</span>
-            <input type="text" name="name" placeholder="Nome" />
+          <label for="contact-name">
+            <span class="form-label">Nome</span>
+            <input
+              id="contact-name"
+              type="text"
+              name="name"
+              [(ngModel)]="contactRequest.name"
+              #nameField="ngModel"
+              placeholder="Como podemos chamar você?"
+              autocomplete="name"
+              required
+            />
+            @if (nameField.invalid && (nameField.touched || quoteForm.submitted)) {
+              <small class="form-error">Informe seu nome.</small>
+            }
           </label>
-          <label>
-            <span>Email</span>
-            <input type="email" name="email" placeholder="Email" />
+          <label for="contact-email">
+            <span class="form-label">E-mail</span>
+            <input
+              id="contact-email"
+              type="email"
+              name="email"
+              [(ngModel)]="contactRequest.email"
+              #emailField="ngModel"
+              placeholder="seuemail@exemplo.com"
+              autocomplete="email"
+              required
+              email
+            />
+            @if (emailField.invalid && (emailField.touched || quoteForm.submitted)) {
+              <small class="form-error">Informe um e-mail válido.</small>
+            }
           </label>
         </div>
-        <label>
-          <span>Assunto</span>
-          <input type="text" name="subject" placeholder="Assunto" />
+
+        <div class="form-row">
+          <label for="contact-service">
+            <span class="form-label">Serviço</span>
+            <p-select
+              inputId="contact-service"
+              name="service"
+              class="service-select"
+              [(ngModel)]="contactRequest.service"
+              #serviceField="ngModel"
+              [options]="serviceOptions"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Selecione um serviço"
+              [showClear]="true"
+              [fluid]="true"
+              [invalid]="serviceField.invalid && (serviceField.touched || quoteForm.submitted)"
+              required
+            />
+            @if (serviceField.invalid && (serviceField.touched || quoteForm.submitted)) {
+              <small class="form-error">Selecione o serviço desejado.</small>
+            }
+          </label>
+
+          <label for="contact-company">
+            <span class="form-label">Empresa <small>(opcional)</small></span>
+            <input
+              id="contact-company"
+              type="text"
+              name="company"
+              [(ngModel)]="contactRequest.company"
+              placeholder="Nome da sua empresa"
+              autocomplete="organization"
+            />
+          </label>
+        </div>
+
+        <label for="contact-message">
+          <span class="form-label">Mensagem</span>
+          <textarea
+            id="contact-message"
+            name="message"
+            [(ngModel)]="contactRequest.message"
+            #messageField="ngModel"
+            rows="6"
+            placeholder="Conte com detalhes o que você gostaria de desenvolver..."
+            required
+          ></textarea>
+          @if (messageField.invalid && (messageField.touched || quoteForm.submitted)) {
+            <small class="form-error">Descreva o que você precisa.</small>
+          }
         </label>
-        <label>
-          <span>Mensagem</span>
-          <textarea name="message" rows="5" placeholder="Mensagem"></textarea>
-        </label>
-        <button class="btn btn-primary" type="submit">
-          <i class="pi pi-th-large" aria-hidden="true"></i>
-          Enviar mensagem
-          <i class="pi pi-arrow-right" aria-hidden="true"></i>
+
+        <button class="btn whatsapp-submit" type="submit">
+          <i class="pi pi-whatsapp" aria-hidden="true"></i>
+          Solicitar orçamento
         </button>
       </form>
     </div>
