@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://josepessoa.dev/sitemap.xml
+Sitemap: https://josepessoa.dev.br/sitemap.xml
