@@ -1,4 +1,5 @@
 import { CanMatchFn, Routes } from '@angular/router';
+import { Connections } from './pages/connections/connections';
 import { Home } from './pages/home/home';
 import { Support } from './pages/support/support';
 
@@ -22,6 +23,11 @@ export const routes: Routes = [
     path: 'suporte',
     component: Support,
     title: 'Suporte Técnico | José Pessoa',
+  },
+  {
+    path: 'conexoes',
+    component: Connections,
+    title: 'Conexões | José Pessoa',
   },
   {
     path: '',

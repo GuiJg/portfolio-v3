@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 
 import { Footer } from './components/footer/footer';
 import { Header } from './components/header/header';
@@ -8,12 +8,27 @@ import { Header } from './components/header/header';
   selector: 'app-root',
   imports: [RouterOutlet, Header, Footer],
   template: `
-    <app-header></app-header>
+    @if (!isStandalonePage()) {
+      <app-header></app-header>
+    }
     <router-outlet></router-outlet>
-    <app-footer></app-footer>
+    @if (!isStandalonePage()) {
+      <app-footer></app-footer>
+    }
   `,
   styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('portfolio-v3');
+  readonly isStandalonePage = signal(
+    typeof window !== 'undefined' && window.location.pathname.startsWith('/conexoes'),
+  );
+
+  constructor(private readonly router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isStandalonePage.set(event.urlAfterRedirects.startsWith('/conexoes'));
+      }
+    });
+  }
 }

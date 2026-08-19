@@ -1,0 +1,107 @@
+<main class="connections-page">
+  <div class="connections-grid" aria-hidden="true"></div>
+  <div class="ambient-orb ambient-orb-one" aria-hidden="true"></div>
+  <div class="ambient-orb ambient-orb-two" aria-hidden="true"></div>
+
+  <section class="connections-card" aria-labelledby="connections-title">
+    <header class="connections-toolbar">
+      <a
+        class="mini-brand"
+        href="https://josepessoa.dev.br/"
+        aria-label="Ir para o site de José Pessoa"
+      >
+        <img src="/favicon.svg" alt="" />
+      </a>
+
+      <div class="toolbar-actions">
+        <button
+          type="button"
+          class="toolbar-button"
+          (click)="toggleTheme()"
+          [attr.aria-label]="isLightTheme ? 'Ativar tema escuro' : 'Ativar tema claro'"
+          [title]="isLightTheme ? 'Ativar tema escuro' : 'Ativar tema claro'"
+        >
+          <i
+            class="pi"
+            [class.pi-moon]="!isLightTheme"
+            [class.pi-sun]="isLightTheme"
+            aria-hidden="true"
+          ></i>
+        </button>
+
+        <button
+          type="button"
+          class="toolbar-button"
+          (click)="sharePage()"
+          aria-label="Compartilhar esta página"
+          title="Compartilhar esta página"
+        >
+          <i class="pi pi-share-alt" aria-hidden="true"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="profile-block">
+      <div class="profile-logo-wrap">
+        <span class="profile-logo-glow" aria-hidden="true"></span>
+        <img class="profile-logo" src="/favicon.svg" alt="Logo JP de José Pessoa" />
+        <span class="profile-status" title="Disponível para novos projetos">
+          <span></span>
+        </span>
+      </div>
+
+      <span class="profile-handle">@jgui.dev</span>
+      <h1 id="connections-title">José Pessoa</h1>
+      <p class="profile-role">Desenvolvedor Full-Stack &amp; Suporte em TI</p>
+      <p class="profile-description">
+        Crio soluções digitais para empresas e também ajudo pessoas e pequenos negócios com serviços
+        essenciais de tecnologia.
+      </p>
+      <p class="profile-instruction">
+        <i class="pi pi-arrow-down" aria-hidden="true"></i>
+        Escolha abaixo o serviço ou canal que você procura.
+      </p>
+    </div>
+
+    <nav class="connections-list" aria-label="Serviços e canais de contato">
+      @for (link of links; track link.title) {
+        <a
+          class="connection-link"
+          [href]="link.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          [style.--link-accent]="link.accent"
+          [attr.aria-label]="link.actionLabel"
+        >
+          <span class="connection-icon">
+            <i [class]="link.icon" aria-hidden="true"></i>
+          </span>
+          <span class="connection-copy">
+            <strong>{{ link.title }}</strong>
+            <small>{{ link.description }}</small>
+          </span>
+          <span class="connection-arrow" aria-hidden="true">
+            <i class="pi pi-arrow-up-right"></i>
+          </span>
+        </a>
+      }
+    </nav>
+
+    <footer class="connections-footer">
+      <span class="availability">
+        <span aria-hidden="true"></span>
+        Disponível para novos projetos e atendimentos
+      </span>
+      <a href="https://josepessoa.dev.br/" target="_blank" rel="noopener noreferrer">
+        josepessoa.dev.br
+      </a>
+    </footer>
+  </section>
+
+  @if (shareFeedback) {
+    <div class="share-feedback" role="status">
+      <i class="pi pi-check-circle" aria-hidden="true"></i>
+      {{ shareFeedback }}
+    </div>
+  }
+</main>
