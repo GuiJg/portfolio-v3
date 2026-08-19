@@ -1,0 +1,324 @@
+<main id="home" class="support-page">
+  <section id="inicio" class="support-hero">
+    <div class="support-glow support-glow-one" aria-hidden="true"></div>
+    <div class="support-glow support-glow-two" aria-hidden="true"></div>
+
+    <div class="section-container support-hero-grid">
+      <div class="support-hero-copy">
+        <span class="section-kicker">Assistência técnica e suporte em TI</span>
+        <h1>Seu computador funcionando <span>sem complicação.</span></h1>
+        <p class="support-hero-description">
+          Atendimento direto para notebooks, desktops e pequenas redes. Diagnóstico claro, serviço
+          organizado e explicações fáceis de entender.
+        </p>
+
+        <div class="support-hero-actions">
+          <a
+            class="btn btn-primary"
+            [href]="whatsappLink"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="pi pi-whatsapp" aria-hidden="true"></i>
+            Solicitar atendimento
+          </a>
+          <a class="btn btn-outline" href="#servicos-suporte">
+            Ver serviços
+            <i class="pi pi-arrow-down" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <ul class="hero-trust-list" aria-label="Diferenciais do atendimento">
+          <li><i class="pi pi-check-circle" aria-hidden="true"></i> Orçamento antes do serviço</li>
+          <li><i class="pi pi-check-circle" aria-hidden="true"></i> Atendimento agendado</li>
+          <li>
+            <i class="pi pi-check-circle" aria-hidden="true"></i> Explicação sem termos complicados
+          </li>
+        </ul>
+      </div>
+
+      <div class="support-hero-media">
+        <div class="hero-image-frame">
+          <img
+            src="https://images.pexels.com/photos/6754846/pexels-photo-6754846.jpeg?auto=compress&cs=tinysrgb&w=1600"
+            alt="Técnico realizando manutenção em uma placa de computador"
+            fetchpriority="high"
+          />
+          <div class="hero-image-overlay"></div>
+          <div class="hero-status-card">
+            <span class="status-icon"><i class="pi pi-wrench" aria-hidden="true"></i></span>
+            <div>
+              <strong>Suporte técnico</strong>
+              <p>Para casa e pequenos negócios</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="floating-tech-card floating-card-top" aria-hidden="true">
+          <i class="pi pi-desktop"></i>
+          <span>Desktops e notebooks</span>
+        </div>
+        <div class="floating-tech-card floating-card-bottom" aria-hidden="true">
+          <i class="pi pi-wifi"></i>
+          <span>Rede organizada</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="support-benefits" aria-label="Compromissos do atendimento">
+    <div class="section-container benefits-grid">
+      <div>
+        <i class="pi pi-search" aria-hidden="true"></i>
+        <span><strong>Diagnóstico claro</strong> antes de qualquer decisão</span>
+      </div>
+      <div>
+        <i class="pi pi-comments" aria-hidden="true"></i>
+        <span><strong>Contato direto</strong> durante o atendimento</span>
+      </div>
+      <div>
+        <i class="pi pi-check-square" aria-hidden="true"></i>
+        <span><strong>Testes finais</strong> após o serviço</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos-suporte" class="support-services support-section">
+    <div class="section-container">
+      <div class="support-heading">
+        <span class="section-kicker">Serviços principais</span>
+        <h2>Ajuda prática para os problemas mais comuns de <span>tecnologia</span></h2>
+        <p>
+          Do computador lento à organização dos cabos de rede, cada atendimento começa pela
+          necessidade real do equipamento.
+        </p>
+      </div>
+
+      <div class="main-services-grid">
+        @for (service of mainServices; track service.title) {
+          <article class="support-service-card">
+            <span class="service-card-icon"><i [class]="service.icon" aria-hidden="true"></i></span>
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.description }}</p>
+            <ul>
+              @for (item of service.items; track item) {
+                <li><i class="pi pi-check" aria-hidden="true"></i> {{ item }}</li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="rede" class="network-section support-section">
+    <div class="section-container network-grid">
+      <div class="network-media">
+        <img
+          src="https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg?auto=compress&cs=tinysrgb&w=1600"
+          alt="Profissional organizando e conectando cabos de rede"
+          loading="lazy"
+        />
+        <span class="network-photo-tag">
+          <i class="pi pi-sitemap" aria-hidden="true"></i>
+          Cabeamento básico
+        </span>
+      </div>
+
+      <div class="network-copy">
+        <span class="section-kicker">Redes sem bagunça</span>
+        <h2>Infraestrutura básica de rede, com <span>escopo transparente</span></h2>
+        <p>
+          O atendimento de rede é voltado aos serviços essenciais de cabeamento para pequenas
+          instalações. O objetivo é corrigir terminações, conferir conexões e deixar os cabos
+          organizados e identificados.
+        </p>
+
+        <div class="scope-columns">
+          <div class="scope-card scope-card-yes">
+            <h3><i class="pi pi-check-circle" aria-hidden="true"></i> O que está incluído</h3>
+            <ul>
+              <li>Crimpagem de conectores RJ45</li>
+              <li>Teste de continuidade dos cabos</li>
+              <li>Organização e identificação</li>
+              <li>Ajustes simples nos pontos existentes</li>
+            </ul>
+          </div>
+          <div class="scope-card scope-card-info">
+            <h3><i class="pi pi-info-circle" aria-hidden="true"></i> Limite do serviço</h3>
+            <p>
+              Projetos estruturais, passagem complexa, fibra óptica, servidores e obras elétricas
+              precisam de avaliação e profissionais especializados.
+            </p>
+          </div>
+        </div>
+
+        <a
+          class="inline-whatsapp-link"
+          [href]="whatsappLink"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Consultar serviço de rede
+          <i class="pi pi-whatsapp" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="extra-services support-section">
+    <div class="section-container">
+      <div class="support-heading support-heading-left">
+        <span class="section-kicker">Também posso ajudar</span>
+        <h2>Outros serviços simples de <span>assistência técnica</span></h2>
+        <p>Pequenos ajustes que fazem diferença no uso diário dos seus equipamentos.</p>
+      </div>
+
+      <div class="extra-services-grid">
+        @for (service of extraServices; track service.title) {
+          <article class="extra-service-card">
+            <i [class]="service.icon" aria-hidden="true"></i>
+            <div>
+              <h3>{{ service.title }}</h3>
+              <p>{{ service.description }}</p>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="maintenance-feature support-section">
+    <div class="section-container maintenance-grid">
+      <div class="maintenance-copy">
+        <span class="section-kicker">Manutenção responsável</span>
+        <h2>Antes de trocar o equipamento, vale a pena <span>entender o problema</span></h2>
+        <p>
+          Lentidão, travamentos e aquecimento nem sempre significam que o computador chegou ao fim.
+          Uma limpeza, um SSD, mais memória ou uma instalação bem feita podem recuperar a
+          experiência de uso por um bom tempo.
+        </p>
+        <ul>
+          <li>
+            <i class="pi pi-check" aria-hidden="true"></i> Avaliação do que realmente precisa ser
+            feito
+          </li>
+          <li>
+            <i class="pi pi-check" aria-hidden="true"></i> Orientação antes da compra de peças
+          </li>
+          <li>
+            <i class="pi pi-check" aria-hidden="true"></i> Sem substituições sem a sua aprovação
+          </li>
+        </ul>
+        <a class="btn btn-outline" [href]="whatsappLink" target="_blank" rel="noopener noreferrer">
+          Tirar uma dúvida
+          <i class="pi pi-whatsapp" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <div class="maintenance-image">
+        <img
+          src="https://images.pexels.com/photos/7639370/pexels-photo-7639370.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="Técnico reparando os componentes internos de um notebook"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section id="como-funciona" class="process-section support-section">
+    <div class="section-container">
+      <div class="support-heading">
+        <span class="section-kicker">Como funciona</span>
+        <h2>Um atendimento simples do primeiro contato aos <span>testes finais</span></h2>
+      </div>
+
+      <div class="process-grid">
+        @for (step of steps; track step.number) {
+          <article class="process-card">
+            <span>{{ step.number }}</span>
+            <h3>{{ step.title }}</h3>
+            <p>{{ step.description }}</p>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="duvidas" class="faq-section support-section">
+    <div class="section-container faq-grid">
+      <div class="faq-intro">
+        <span class="section-kicker">Dúvidas frequentes</span>
+        <h2>Informação clara antes de <span>solicitar o serviço</span></h2>
+        <p>Se sua dúvida não estiver aqui, envie uma mensagem e descreva o problema.</p>
+        <a
+          class="inline-whatsapp-link"
+          [href]="whatsappLink"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Falar pelo WhatsApp
+          <i class="pi pi-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <div class="faq-list">
+        <details open>
+          <summary>O orçamento é feito antes do serviço?</summary>
+          <p>
+            Sim. Depois do diagnóstico, você recebe a explicação do que precisa ser feito. O serviço
+            só continua após a sua aprovação.
+          </p>
+        </details>
+        <details>
+          <summary>Meus arquivos podem ser mantidos durante a formatação?</summary>
+          <p>
+            Quando o armazenamento está funcionando, é possível combinar um backup antes da
+            formatação. A condição dos arquivos é conferida na avaliação.
+          </p>
+        </details>
+        <details>
+          <summary>Você instala programas depois do Windows?</summary>
+          <p>
+            Sim. Drivers, navegador, leitor de PDF e outros programas essenciais podem ser
+            configurados conforme a necessidade e as licenças do cliente.
+          </p>
+        </details>
+        <details>
+          <summary>O serviço de rede inclui passar cabos por toda a empresa?</summary>
+          <p>
+            O foco é crimpagem, teste e organização de cabos em pequenas instalações. Passagens
+            complexas, obras e projetos estruturais precisam de uma avaliação específica.
+          </p>
+        </details>
+        <details>
+          <summary>Você conserta notebooks?</summary>
+          <p>
+            Em notebooks são realizados serviços de software, formatação, limpeza, upgrades e
+            diagnósticos simples. Reparos eletrônicos avançados de placa são encaminhados para um
+            especialista quando necessário.
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato-suporte" class="support-cta support-section">
+    <div class="section-container">
+      <div class="support-cta-card">
+        <div>
+          <span class="section-kicker">Precisa de ajuda?</span>
+          <h2>Conte o que está acontecendo com seu equipamento.</h2>
+          <p>
+            Envie o modelo, descreva o problema e, se possível, inclua fotos ou mensagens de erro.
+            Assim o primeiro atendimento fica mais rápido e objetivo.
+          </p>
+        </div>
+        <a class="btn btn-primary" [href]="whatsappLink" target="_blank" rel="noopener noreferrer">
+          <i class="pi pi-whatsapp" aria-hidden="true"></i>
+          Pedir orçamento no WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+</main>

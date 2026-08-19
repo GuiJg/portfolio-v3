@@ -9,10 +9,13 @@ import { Component } from '@angular/core';
 export class Header {
   isLightTheme = false;
   isMenuOpen = false;
+  isSupportPage = false;
 
   ngOnInit() {
-    this.isLightTheme =
-      document.documentElement.classList.contains('light-theme');
+    this.isLightTheme = document.documentElement.classList.contains('light-theme');
+    this.isSupportPage =
+      window.location.hostname.toLowerCase() === 'suporte.josepessoa.dev.br' ||
+      window.location.pathname.startsWith('/suporte');
   }
 
   toggleTheme() {

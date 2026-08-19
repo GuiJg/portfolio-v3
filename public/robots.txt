@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://josepessoa.dev.br/sitemap.xml
+Sitemap: https://suporte.josepessoa.dev.br/sitemap-suporte.xml

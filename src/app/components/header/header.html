@@ -1,17 +1,32 @@
 <header class="site-header">
   <div class="header-shell">
-    <a class="brand" href="#home" aria-label="Voltar para o início">
+    <a class="brand" [href]="isSupportPage ? '#inicio' : '#home'" aria-label="Voltar para o início">
       <span class="brand-mark">JP</span>
-      <span class="brand-name">José Pessoa</span>
+      <span class="brand-name">
+        José Pessoa
+        @if (isSupportPage) {
+          <small>Suporte TI</small>
+        }
+      </span>
     </a>
 
     <nav class="desktop-nav" aria-label="Navegação principal">
-      <a href="#home" class="active">Home</a>
-      <a href="#sobre">Sobre</a>
-      <a href="#skills">Skills</a>
-      <a href="#projetos">Projetos</a>
-      <a href="#servicos">Serviços</a>
-      <a href="#contato">Contato</a>
+      @if (isSupportPage) {
+        <a href="#inicio" class="active">Início</a>
+        <a href="#servicos-suporte">Serviços</a>
+        <a href="#rede">Redes</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#duvidas">Dúvidas</a>
+        <a href="#contato-suporte">Contato</a>
+      } @else {
+        <a href="#home" class="active">Home</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#skills">Skills</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#contato">Contato</a>
+        <a class="support-nav-link" href="https://suporte.josepessoa.dev.br/">Suporte TI</a>
+      }
     </nav>
 
     <div class="header-actions">
@@ -19,9 +34,7 @@
         type="button"
         class="theme-toggle"
         (click)="toggleTheme()"
-        [attr.aria-label]="
-          isLightTheme ? 'Ativar tema escuro' : 'Ativar tema claro'
-        "
+        [attr.aria-label]="isLightTheme ? 'Ativar tema escuro' : 'Ativar tema claro'"
       >
         <i
           class="pi"
@@ -47,12 +60,22 @@
 
   @if (isMenuOpen) {
     <nav class="mobile-nav" aria-label="Navegação mobile">
-      <a href="#home" (click)="closeMenu()">Home</a>
-      <a href="#sobre" (click)="closeMenu()">Sobre</a>
-      <a href="#skills" (click)="closeMenu()">Skills</a>
-      <a href="#projetos" (click)="closeMenu()">Projetos</a>
-      <a href="#servicos" (click)="closeMenu()">Serviços</a>
-      <a href="#contato" (click)="closeMenu()">Contato</a>
+      @if (isSupportPage) {
+        <a href="#inicio" (click)="closeMenu()">Início</a>
+        <a href="#servicos-suporte" (click)="closeMenu()">Serviços</a>
+        <a href="#rede" (click)="closeMenu()">Redes e cabeamento</a>
+        <a href="#como-funciona" (click)="closeMenu()">Como funciona</a>
+        <a href="#duvidas" (click)="closeMenu()">Dúvidas</a>
+        <a href="#contato-suporte" (click)="closeMenu()">Contato</a>
+      } @else {
+        <a href="#home" (click)="closeMenu()">Home</a>
+        <a href="#sobre" (click)="closeMenu()">Sobre</a>
+        <a href="#skills" (click)="closeMenu()">Skills</a>
+        <a href="#projetos" (click)="closeMenu()">Projetos</a>
+        <a href="#servicos" (click)="closeMenu()">Serviços</a>
+        <a href="#contato" (click)="closeMenu()">Contato</a>
+        <a href="https://suporte.josepessoa.dev.br/" (click)="closeMenu()">Suporte TI</a>
+      }
     </nav>
   }
 </header>
